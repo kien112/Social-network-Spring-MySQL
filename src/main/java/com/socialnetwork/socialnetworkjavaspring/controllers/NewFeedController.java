@@ -1,28 +1,34 @@
 package com.socialnetwork.socialnetworkjavaspring.controllers;
 
+import com.socialnetwork.socialnetworkjavaspring.models.Post;
 import com.socialnetwork.socialnetworkjavaspring.models.User;
-import com.socialnetwork.socialnetworkjavaspring.services.new_feeds.NewFeedServices;
+import com.socialnetwork.socialnetworkjavaspring.services.posts.IPostServices;
 import com.socialnetwork.socialnetworkjavaspring.services.sessions.SessionService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/new-feed")
 public class NewFeedController {
     @Autowired
     private SessionService sessionService;
     @Autowired
-    private NewFeedServices newFeedServices;
+    private IPostServices postServices;
 
-    @GetMapping("/index")
+    @GetMapping
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("new_feeds/index");
         User user = sessionService.currentUser();
-        modelAndView.addObject("posts", newFeedServices.findAllPostForNewsFeed(user.getUserId()));
+        List<Post> posts = postServices.findAllPostForNewsFeed(user.getUserId());
 
+        modelAndView.addObject("posts", posts);
         return modelAndView;
     }
 }
