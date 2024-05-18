@@ -20,16 +20,15 @@ public class PostController extends ApplicationController {
 
     @Autowired
     private IPostServices postServices;
-    @PostMapping(value = "/create", consumes = "multipart/form-data")
-    public ResponseEntity<?> createPost(@RequestParam("access") String access,
-                                         @RequestParam("content") String content,
-                                         @RequestParam("postType") String postType,
-                                         @RequestPart(value = "files", required = false) List<MultipartFile> files,
-                                         @RequestParam(value = "userTagIds", required = false) List<String> userTagIds,
-                                         @RequestParam(value = "hagTags", required = false) List<String> hagTags){
-        return new ResponseEntity<>(
-                postServices.createPost(access, content, postType,
-                        files, userTagIds, currentUser.getUserId(), hagTags),
-                HttpStatus.CREATED);
+    @PostMapping(value = "/create")
+    public ResponseEntity<?> createPost(@ModelAttribute CreatePostRequest request,
+                                         @RequestPart(value = "files", required = false) List<MultipartFile> files){
+        try{
+            return new ResponseEntity<>(
+                    postServices.createPost(request, files, currentUser.getUserId()),
+                    HttpStatus.CREATED);
+        }catch (Exception ex){
+            return new ResponseEntity<>(ex.getMessage() ,HttpStatus.BAD_REQUEST);
+        }
     }
 }

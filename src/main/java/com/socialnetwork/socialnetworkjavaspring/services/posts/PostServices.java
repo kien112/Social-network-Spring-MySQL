@@ -45,19 +45,18 @@ public class PostServices implements IPostServices{
 
     @Override
     @Transactional
-    public PostResponse createPost(String access, String content, String postType,
+    public PostResponse createPost(CreatePostRequest request,
                                    List<MultipartFile> files,
-                                   List<String> userTagIds,
-                                   String userId, List<String> hagTags) {
+                                   String userId) {
 
         Post post = new Post();
-        post.setPostContent(content);
-        post.setPostType(PostType.valueOf(postType));
-        post.setAccess(PostAccess.valueOf(access));
+        post.setPostContent(request.getContent());
+        post.setPostType(request.getPostType());
+        post.setAccess(request.getAccess());
         post.setPostId(UUID.randomUUID().toString());
         post.setUser(new User(userId));
-        List<UserParticipantDTO> userTags = setUserTags(post, userTagIds);
-        setPostHagTags(post, hagTags);
+        List<UserParticipantDTO> userTags = setUserTags(post, request.getUserTagIds());
+        setPostHagTags(post, request.getHagTags());
 
         postRepository.save(post);
 

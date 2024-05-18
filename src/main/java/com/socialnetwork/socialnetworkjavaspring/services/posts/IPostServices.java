@@ -10,10 +10,7 @@ import java.util.List;
 
 public interface IPostServices extends IGeneralService<Post, String> {
     List<Post> findAllPostForNewsFeed(String userId);
-    PostResponse createPost(String access,
-                            String content,
-                            String postType,
+    PostResponse createPost(CreatePostRequest request,
                             List<MultipartFile> files,
-                            List<String> userTagIds,
-                            String userId, List<String> hagTags);
+                            String userId);
 }
