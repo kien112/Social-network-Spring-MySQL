@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layouts/application:: application_layout}" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layouts/application:: application_layout(true)}" lang="en">
 <head>
   <meta charset="UTF-8">
   <title th:fragment="page_title">New feeds</title>
@@ -8,7 +8,7 @@
 
 <!-- main content -->
 <div th:fragment="main_content" class="main-content right-chat-active">
-
+  <link rel="stylesheet" th:href="@{/assets/css/new-feed.css}"/>
   <div class="middle-sidebar-bottom">
     <div class="middle-sidebar-left">
       <!-- loader wrapper -->
@@ -325,8 +325,15 @@
       </div>
     </div>
   </div>
+  <script th:src="@{/assets/js/plugin.js}"></script>
+  <script th:src="@{/assets/javascript/posts/index.js}"></script>
 </div>
 <!-- main content -->
+
+<div th:fragment="fragments">
+  <div th:replace="~{/new_feeds/_fragment_create_post :: fragment-create-post}"></div>
+  <div th:replace="~{/new_feeds/_fragment_tag_users :: fragment-tag-users}"></div>
+</div>
 
 </body>
 </html>

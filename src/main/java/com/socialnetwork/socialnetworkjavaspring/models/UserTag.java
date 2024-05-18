@@ -28,4 +28,8 @@ public class UserTag {
     @MapsId("postId")
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
+
+    public UserTag(UserTagId userTagId) {
+        this.userTagId = userTagId;
+    }
 }

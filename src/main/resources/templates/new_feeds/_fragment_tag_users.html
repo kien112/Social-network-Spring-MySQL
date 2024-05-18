@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Modal Tag Friends-->
+<div th:fragment="fragment-tag-users" class="modal fade" id="tag-friends" tabindex="-1" aria-labelledby="tag-friends" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tag-friendsLabel">Tag Friends</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="container mt-4">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                        <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                    </svg>
+                </span>
+              <input type="text" id="search-friends" class="form-control" placeholder="Search">
+            </div>
+            <p class="m-2">Users Tag:</p>
+            <div id="users-tag" class="m-2 p-2 border border-1 custom-overflow">
+
+            </div>
+            <div id="list-friends" class="custom-overflow">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer text-light">
+        <button data-bs-dismiss="modal" type="button" class="btn btn-primary ms-3">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

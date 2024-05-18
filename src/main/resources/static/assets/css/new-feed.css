@@ -1,0 +1,7 @@
+.custom-overflow {
+    max-height: 250px;
+    overflow-y: auto;
+}
+#list-friends{
+    height: 250px;
+}

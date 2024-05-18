@@ -1,5 +1,6 @@
 package com.socialnetwork.socialnetworkjavaspring.services.users;
 
+import com.socialnetwork.socialnetworkjavaspring.DTOs.users.UserParticipantDTO;
 import com.socialnetwork.socialnetworkjavaspring.models.CustomUserDetails;
 import com.socialnetwork.socialnetworkjavaspring.models.User;
 import com.socialnetwork.socialnetworkjavaspring.repositories.IUserRepository;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +52,20 @@ public class UserService implements IUserService {
         );
 
         return new CustomUserDetails(user);
+    }
+
+    @Override
+    public List<UserParticipantDTO> getUserFriends(String userId) {
+        List<User> userFriends = userRepository.getUserFriends(userId);
+        List<UserParticipantDTO> userFriendDTOs = new ArrayList<>();
+        for (User u : userFriends) {
+            userFriendDTOs.add(new UserParticipantDTO(
+                    u.getUserId(),
+                    u.getFullName(),
+                    u.getAvatar()
+            ));
+        }
+
+        return userFriendDTOs;
     }
 }
